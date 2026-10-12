@@ -73,3 +73,9 @@
 - Missing AI is permitted for human review; AI never decides outcomes.
 - One FINALIZED event has one linked WAIVER review decision. Interview fulfillment remains independent.
 - Simulation cannot detect every semantic equivalence from arbitrary descriptions; this limitation must be tested explicitly.
+
+## Increment 6 — deterministic accounting
+- Agreement-level and event-level metrics derived from validated stored records, not saved as fabricated totals.
+- E = R + P + N + U + H; zero E displays N/A. Pending and unfavorable events remain in E.
+- Interview fulfillment is a separate eligible-event count and cannot imply removal.
+- Full mobile, security and adversarial acceptance evidence remains pending user verification.

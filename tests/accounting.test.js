@@ -1,0 +1,9 @@
+import test from 'node:test';import assert from 'node:assert/strict';
+import {accountability} from '../src/logic/accounting.js';
+import {fictionalFixtures} from '../src/data/demoFixtures.js';
+const empty=()=>{const db=structuredClone(fictionalFixtures);db.waiver_events=[];return db;};
+const event=(id,status,outcome=null,interview='UNVERIFIED')=>({event_id:id,eligibility_status:status,workflow_state:outcome?'FINALIZED':'RECORDED',human_outcome:outcome,interview_fulfillment:interview});
+test('zero denominator produces N/A sentinel, not percent',()=>{const x=accountability(empty());assert.equal(x.waiverRate,null);assert.equal(x.events.eligible,0);});
+test('all five buckets reconcile, ineligible excluded',()=>{const db=empty();db.waiver_events=[event('1','ELIGIBLE','VERIFIED_REMOVED','NOT_FULFILLED'),event('2','ELIGIBLE','REPLACED'),event('3','ELIGIBLE','NOT_REMOVED'),event('4','ELIGIBLE','UNVERIFIED'),event('5','ELIGIBLE'),event('6','INELIGIBLE','VERIFIED_REMOVED')];const x=accountability(db);assert.equal(x.events.eligible,5);assert.equal(x.events.removed,1);assert.equal(x.events.pending,1);assert.equal(x.waiverRate,0.2);assert.equal(x.interviews.notFulfilled,1);});
+test('100% removal still shows inactive/never tested agreements separately',()=>{const db=empty();const a=structuredClone(db.agreements[0]);a.agreement_id='AGR_OTHER';a.version_id='VER_OTHER';a.state='EXPIRED';db.agreements.push(a);db.agreement_versions.push({...a,state:'ACTIVE',reviewer_decision:'APPROVED'});db.waiver_events=[{...event('1','ELIGIBLE','VERIFIED_REMOVED'),agreement_version_id:db.agreements[0].version_id}];const x=accountability(db);assert.equal(x.waiverRate,1);assert.equal(x.agreements.neverTested,1);});
+test('unverified or pending never increase removal numerator',()=>{const db=empty();db.waiver_events=[event('1','ELIGIBLE','UNVERIFIED'),event('2','ELIGIBLE')];const x=accountability(db);assert.equal(x.events.removed,0);assert.equal(x.events.eligible,2);});

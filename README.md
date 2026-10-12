@@ -83,3 +83,6 @@ Use `npx vercel dev` from the existing linked project directory (the CLI may req
 
 ## Increment 5 — human waiver review
 Select Human review for an eligible event. All six evidence gates and a rationale are required for VERIFIED_REMOVED. The description and replacement fields are checked for explicit conflicts. No authenticated external audit is claimed. Run `npm test`.
+
+## Increment 6 — dashboard
+Accountability Dashboard derives metrics from all browser-local fictional records. Rates use R / E and display N/A at E=0. Historical eligible events remain linked to their original agreement version. Run `npm test` and `npm run build`, then verify narrow-screen usability.

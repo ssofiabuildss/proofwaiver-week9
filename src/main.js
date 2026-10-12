@@ -21,7 +21,7 @@ function render(){
     status=`Storage unavailable or invalid: ${err.message}. No records were modified.`;
     content='<h2>Local storage error</h2><p>Application controls are disabled until the stored data is corrected.</p>';
   }
-  app.innerHTML=`<header><strong>ProofWaiver</strong><div class="banner" role="status">FICTIONAL DEMO — NO REAL HIRING</div></header><div class="layout"><nav aria-label="Product screens">${nav}</nav><main><small>Increment 5 · Human waiver review</small>${content}<p class="status" id="storage-status"></p></main></div><footer>All records fictional · Browser-local storage is not tamper-proof or externally audited.</footer>`;
+  app.innerHTML=`<header><strong>ProofWaiver</strong><div class="banner" role="status">FICTIONAL DEMO — NO REAL HIRING</div></header><div class="layout"><nav aria-label="Product screens">${nav}</nav><main><small>Increment 6 · Accountability dashboard</small>${content}<p class="status" id="storage-status"></p></main></div><footer>All records fictional · Browser-local storage is not tamper-proof or externally audited.</footer>`;
   document.querySelector('#storage-status').textContent=status;
   if(ready && routes[active][2])routes[active][2](render);
 }
