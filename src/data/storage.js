@@ -11,11 +11,13 @@ export function initializeStorage() {
   return clone(fictionalFixtures);
 }
 export function readDatabase(){return initializeStorage();}
+export function saveDatabase(db){validateDatabase(db);localStorage.setItem(KEY,JSON.stringify(db));}
+export function transaction(action){
+  const db=readDatabase();return action(db,saveDatabase);
+}
 export function createRecord(collection,record){
   validateRecord(collection,record);
   const db=readDatabase(), key=collectionIds[collection];
   if(db[collection].some(item=>item[key]===record[key])) throw new Error('Duplicate record ID');
-  db[collection].push(clone(record));validateDatabase(db);
-  localStorage.setItem(KEY,JSON.stringify(db));return clone(record);
+  db[collection].push(clone(record));saveDatabase(db);return clone(record);
 }
-
