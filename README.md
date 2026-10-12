@@ -41,3 +41,15 @@ No acceptance test should be described as fully passed until its required manual
 ## Proposed second commit
 
 `feat: add employer agreement and human approval workflow`
+
+## Increment 3 — fictional event intake
+
+The Waiver Verification navigation now contains an **event intake form only**. Approve a fictional agreement in Agreement Review, open Waiver Verification, select the approved version, enter an event ID beginning `EVT_`, a fictional reference beginning `CAND_DEMO_`, a UTC trigger timestamp, and the permitted controlled inputs. Form timestamps are treated as UTC; do not enter your local timezone as if it were UTC. Each submitted event is assigned `ELIGIBLE` or `INELIGIBLE` using approved-version terms and event time. Duplicate event IDs and a duplicate reference within the same agreement version are rejected.
+
+To test a false trigger, choose **No — false**; the event is recorded but is not eligible. To test persistence, refresh and confirm the same records remain. To test expiry historically, run the deterministic unit tests rather than modifying your real clock. Existing approved snapshots and event records remain intact after expiry or a proposed material amendment.
+
+No LLM, final reviewer classification or dashboard aggregation is included. `eligibleEventCount` and `neverTestedStatus` are foundational deterministic helpers only. Their outputs are not yet presented as dashboard metrics. The event form is fictional; no real candidate identifiers are allowed.
+
+**Targeted acceptance coverage:** T09/T10/T14/T20 event eligibility; T16/T21 version history; T23 expired with earlier eligible event; T11/T24 denominator and never-tested foundations. Full dashboard review and other final test requirements remain later increments. These are test targets, not claims of locally confirmed acceptance.
+
+**Proposed Commit 3:** `feat: enforce waiver eligibility and versioning`

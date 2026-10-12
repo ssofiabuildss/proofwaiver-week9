@@ -38,3 +38,12 @@
 - Manual browser checks: PENDING.
 - Commit 2: NOT YET CREATED.
 - Deployment: NOT YET CREATED.
+
+## Increment 3 — fictional waiver-event eligibility (proposed; await local acceptance)
+
+- New fictional events link to the exact approved `agreement_version_id`; the immutable approved snapshot governs activation and expiry. Current agreement linkage prevents new submissions against superseded versions. Previously recorded records and eligibility values are not rewritten on later expiry or amendment.
+- Fictional operator-supplied `EVT_` identifiers are required for meaningful retry/duplicate detection; uniqueness is additionally restricted by agreement version and fictional `CAND_DEMO_` reference. No real candidate identities, profiles or scores are collected.
+- Accepted positive proof is a strict boolean, never scored. False triggers, out-of-window times, future triggers and unapproved/superseded versions are ineligible. A trigger exactly at `expires_at` is ineligible. Historical valid events retain their original eligibility when an agreement later expires.
+- Both eligible and ineligible fictional events are retained for transparency. `eligibleEventCount` counts only `ELIGIBLE`; `neverTestedStatus` is a derived boolean for CLOSED/EXPIRED agreements with no eligible events across approved versions. Neither function is connected to the final dashboard in Increment 3.
+- Reported assessment and interview fields are collected as fictional event inputs for later steps, but no LLM, human waiver decisions, verified-removal outcome, rates or finished dashboard is implemented here.
+- Local browser storage is editable, not an external audit log. All tests and deployment claims remain subject to the user's actual local run.
