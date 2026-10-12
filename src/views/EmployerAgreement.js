@@ -1,0 +1,1 @@
+export function EmployerAgreement(){return `<h2>Employer Agreement</h2><p>Agreement creation and submission arrive in Increment 2.</p><p>The fictional draft record is stored locally for foundation testing.</p>`;}
