@@ -53,3 +53,33 @@ No LLM, final reviewer classification or dashboard aggregation is included. `eli
 **Targeted acceptance coverage:** T09/T10/T14/T20 event eligibility; T16/T21 version history; T23 expired with earlier eligible event; T11/T24 denominator and never-tested foundations. Full dashboard review and other final test requirements remain later increments. These are test targets, not claims of locally confirmed acceptance.
 
 **Proposed Commit 3:** `feat: enforce waiver eligibility and versioning`
+
+
+## Increment 4 — bounded AI equivalence advisory
+
+Only fictional assessment descriptions are allowed. The client sends exactly seven named fields from the stored eligible event and approved version. It does **not** send the fictional candidate reference, proof boolean, event identifiers, interview fulfillment, failed attempts, scores, resumes or rankings. A simulated AI flag is not the human decision, and `CLEAR` provides zero confirmed-removal credit.
+
+### Server-only environment (never commit secrets)
+
+`.env.example` lists `OPENAI_API_KEY` and `OPENAI_MODEL` (default example: `gpt-4o-mini`). For a real provider call locally, put a legitimate private key in an ignored `.env` file, and set `OPENAI_MODEL` to a supported model. Never prefix these with `VITE_` or enter them in the browser. Configure the same variables in Vercel Project → Settings → Environment Variables if deploying later; environment setup is not proof of deployment.
+
+### Start the endpoint and frontend together
+
+Use `npx vercel dev` from the existing linked project directory (the CLI may require login and project linking). The regular `npm run dev` runs **Vite only**; Vite alone does not serve `/api/compare` and therefore gives the safe `INSUFFICIENT` fallback on requests. Run `npm test` and `npm run build` separately. Missing credentials must safely return `INSUFFICIENT`; a working model call cannot be claimed without a real local/provider test.
+
+### Manual check
+
+1. Verify the four screens and fictional banner still appear.
+2. With an approved fictional version, record an ELIGIBLE event with a replacement description; choose its **Compare assessments** action.
+3. Check the visible **AI advisory (demo only)** flag/rationale and `AI_FLAGGED` state. No final human outcome or removal metric is generated.
+4. Record an INELIGIBLE event and confirm that it has no compare action.
+5. Without API credentials, run through `vercel dev` and confirm `INSUFFICIENT` (not success/approval).
+6. With a private configured credential and a reachable provider, verify a real response and that no candidate ID/flag/interview data appears in the outbound comparison request (only test with fictional inputs).
+7. Refresh and check persistence; repeat on a narrow mobile viewport. No candidate-facing screen exists.
+
+**Associated test targets:** T04, T05, T06, T08, T13, T18, T22 at advisory level only; T12 data-forwarding foundation. Six-gate human review and economic status tests remain in Increment 5. T17 remains incomplete until all workflows exist.
+
+**Proposed Commit 4:** `feat: add bounded AI equivalence advisory`
+
+## Increment 5 — human waiver review
+Select Human review for an eligible event. All six evidence gates and a rationale are required for VERIFIED_REMOVED. The description and replacement fields are checked for explicit conflicts. No authenticated external audit is claimed. Run `npm test`.
